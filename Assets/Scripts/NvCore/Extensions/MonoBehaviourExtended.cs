@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public static class MonoBehaviourExtension
 {
-    static public T GetOrAddComponent<T>(this Component child) where T : Component
+    public static T GetOrAddComponent<T>(this Component child) where T : Component
     {
         T result = child.GetComponent<T>();
         if (result == null)
@@ -13,14 +13,14 @@ public static class MonoBehaviourExtension
         return result;
     }
 
-    static public void SetComponentEnabled<T>(this Transform tr, bool f) where T : MonoBehaviour
+    public static void SetComponentEnabled<T>(this Transform tr, bool f) where T : MonoBehaviour
     {
         T result = tr.GetComponent<T>();
         if (result != null)
             result.enabled = f;
     }
 
-    static public List<T> GetComponentsRecursively<T>(this Transform tr) where T : Component
+    public static List<T> GetComponentsRecursively<T>(this Transform tr) where T : Component
     {
         List<T> ret = new List<T>();
         GetComponentsOf<T>(tr, ref ret);
@@ -36,7 +36,7 @@ public static class MonoBehaviourExtension
         }
     }
 
-    static public Transform FindChildRecursively(this Transform tr, string ss)
+    public static Transform FindChildRecursively(this Transform tr, string ss)
     {
         Transform ret = null;
         FindChildOf(tr, ss, ref ret);
@@ -59,7 +59,7 @@ public static class MonoBehaviourExtension
         }
     }
 
-    static public float GetRadianTo(this Transform self, Vector3 target)
+    public static float GetRadianTo(this Transform self, Vector3 target)
     {
         Vector3 ldir = self.InverseTransformPoint(target);
         if (ldir.x == 0)
@@ -86,7 +86,7 @@ public static class MonoBehaviourExtension
         }
     }
 
-    static public float GetRadianTo(this Vector3 orig, Vector3 from, Vector3 target)
+    public static float GetRadianTo(this Vector3 orig, Vector3 from, Vector3 target)
     {
         Vector3 direction = from - orig;
         Vector3 toTarget = target - orig;
@@ -103,7 +103,7 @@ public static class MonoBehaviourExtension
         return arccos;
     }
 
-    static public Vector3 RotateAroundPivot(this Vector3 point, Vector3 pivot, float angleY)
+    public static Vector3 RotateAroundPivot(this Vector3 point, Vector3 pivot, float angleY)
     {
         Vector3 dir = point - pivot;
         dir.y = 0;
@@ -120,7 +120,7 @@ public static class MonoBehaviourExtension
     /// <param name="des"> the destination of the direction </param>
     /// <param name="pos"> the position that need to calculate the distance </param>
     /// <returns></returns>
-    static public float GetDistanceToDir(this Transform self, Vector3 des, Vector3 pos)
+    public static float GetDistanceToDir(this Transform self, Vector3 des, Vector3 pos)
     {
         Vector3 dir = des - self.position;
         dir.y = 0;
@@ -131,7 +131,7 @@ public static class MonoBehaviourExtension
         return crs.magnitude * (crs.y >= 0 ? 1 : -1);
     }
 
-    static public float GetDistanceToDir(this Vector3 self, Vector3 des, Vector3 pos)
+    public static float GetDistanceToDir(this Vector3 self, Vector3 des, Vector3 pos)
     {
         Vector3 dir = (des - self).normalized;
         Vector3 div = pos - self;
@@ -139,12 +139,12 @@ public static class MonoBehaviourExtension
         return crs.magnitude;
     }
 
-    static public void LookAtXZ(this Transform tr, Transform t)
+    public static void LookAtXZ(this Transform tr, Transform t)
     {
         LookAtXZ(tr, t.position);
     }
 
-    static public void LookAtXZ(this Transform tr, Vector3 t)
+    public static void LookAtXZ(this Transform tr, Vector3 t)
     {
         Vector3 tp = t;
         tp.y = tr.position.y;
@@ -162,7 +162,7 @@ public static class MonoBehaviourExtension
     /// return 1 if f great than e
     /// return 0 if s and e too close
     /// </returns>
-    static public float Normalized(this float f, float s, float e)
+    public static float Normalized(this float f, float s, float e)
     {
         float ret = 0;
         // swap if s greater than e
@@ -199,7 +199,7 @@ public static class MonoBehaviourExtension
     /// <param name="r">circle radius</param>
     /// <param name="CW">the point at CW direction base on point to center direction</param>
     /// <returns></returns>
-    static public Vector2 TangentLine(this Vector2 p, Vector2 c, float r, bool CW = true)
+    public static Vector2 TangentLine(this Vector2 p, Vector2 c, float r, bool CW = true)
     {
         Vector2 ret = c;
         Vector2 pc = c - p;
@@ -230,7 +230,7 @@ public static class MonoBehaviourExtension
     /// <param name="nearestpoint"></param>
     /// <param name="distance"></param>
     /// <returns></returns>
-    static public bool NearestPointToSegment(this Vector3 point, Vector3 start, Vector3 end, out Vector3 nearestpoint, out float distance,float eps = float.Epsilon)
+    public static bool NearestPointToSegment(this Vector3 point, Vector3 start, Vector3 end, out Vector3 nearestpoint, out float distance,float eps = float.Epsilon)
     //static public bool NearestPointToSegment(this Vector3 point, Vector3 start, Vector3 end, float eps = float.Epsilon,out Vector3 nearestpoint, out float distance)
     {
         bool ret = false;
@@ -297,7 +297,7 @@ public static class MonoBehaviourExtension
     /// <param name="nearestpoint"></param>
     /// <param name="distance"></param>
     /// <returns></returns>
-    static public bool NearestPointToSegment(this Vector2 point, Vector2 start, Vector2 end, out Vector2 nearestPoint, out float distance)
+    public static bool NearestPointToSegment(this Vector2 point, Vector2 start, Vector2 end, out Vector2 nearestPoint, out float distance)
     {
         return NearestPointToSegment(point, start, end, out nearestPoint, out distance);
     }
@@ -310,7 +310,7 @@ public static class MonoBehaviourExtension
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    static public float PointToSegmentDistance(this Vector3 point, Vector3 start, Vector3 end)
+    public static float PointToSegmentDistance(this Vector3 point, Vector3 start, Vector3 end)
     {
         float dis;
         Vector3 np;

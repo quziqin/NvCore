@@ -1,6 +1,6 @@
 using UnityEngine;
 
-abstract public class FSMState<T>
+public abstract class FSMState<T>
 {
 	protected T owner;
 	protected object param;
@@ -14,21 +14,21 @@ abstract public class FSMState<T>
 		type = this.GetType();
 	}
 
-	virtual public void Enter() { }
-	virtual public void Execute() { }
-	virtual public void Exit() { }
+	public virtual void Enter() { }
+	public virtual void Execute() { }
+	public virtual void Exit() { }
 
-	virtual public void SetParam(object par)
+	public virtual void SetParam(object par)
 	{
 		this.param = par;
 	}
 
-	virtual public void OnRegisted(T o) 
+	public virtual void OnRegisted(T o) 
 	{
 		this.owner = o;
 	}
 
-	virtual public void OnUnregisted() { }
+	public virtual void OnUnregisted() { }
 
 	public string ID { get { return id; } }
 	public System.Type Type { get { return type; } }

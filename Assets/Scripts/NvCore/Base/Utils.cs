@@ -261,7 +261,7 @@ public class Segment2D
 }
 public static class Utils
 {
-    static public DateTime DtStart
+    public static DateTime DtStart
     {
         get
         {
@@ -269,7 +269,7 @@ public static class Utils
         }
     }
 
-    static public DateTime LocalDtStart
+    public static DateTime LocalDtStart
     {
         get
         {
@@ -277,7 +277,7 @@ public static class Utils
         }
     }
 
-    static public long UtcNow
+    public static long UtcNow
     {
         get
         {
@@ -285,7 +285,7 @@ public static class Utils
         }
     }
 
-    static public T Duplicate<T>(T t)
+    public static T Duplicate<T>(T t)
     {
         object ret = null;
         using (MemoryStream ms = new MemoryStream())
@@ -299,7 +299,7 @@ public static class Utils
         return (T)ret;
     }
 
-    static public T CopyComponent<T>(this Component comp, T other) where T : Component
+    public static T CopyComponent<T>(this Component comp, T other) where T : Component
     {
         Type type = comp.GetType();
         if (type != other.GetType()) return null; // type mis-match
@@ -335,24 +335,24 @@ public static class Utils
     }
 
 
-    static public void Swap<T>(ref T v1, ref T v2)
+    public static void Swap<T>(ref T v1, ref T v2)
     {
         T tmp = v1;
         v1 = v2;
         v2 = tmp;
     }
 
-    static public bool IsMeaningful(ref string ss)
+    public static bool IsMeaningful(ref string ss)
     {
         return ss != null && ss != "" && ss != " " && ss != "null" && ss != "#";
     }
 
-    static public bool IsEmpty(ref string ss)
+    public static bool IsEmpty(ref string ss)
     {
         return ss == "#";
     }
 
-    static public Color32 HexToColor(int HexVal)
+    public static Color32 HexToColor(int HexVal)
     {
         byte R = (byte)((HexVal >> 24) & 0xFF);
         byte G = (byte)((HexVal >> 16) & 0xFF);
@@ -361,17 +361,17 @@ public static class Utils
         return new Color32(R, G, B, A);
     }
 
-    static public Vector3 To2D(Vector3 v)
+    public static Vector3 To2D(Vector3 v)
     {
         return new Vector3(v.x, 0, v.z);
     }
 
-    static public Vector3 To3D(Vector2 v)
+    public static Vector3 To3D(Vector2 v)
     {
         return new Vector3(v.x, 0, v.y);
     }
 
-    static public List<int> GetIntsByString(string ss)
+    public static List<int> GetIntsByString(string ss)
     {
         List<int> ret = new List<int>();
         if (Utils.IsMeaningful(ref ss))
@@ -384,7 +384,7 @@ public static class Utils
         return ret;
     }
 
-    static public List<string> ParseStringList(string ss)
+    public static List<string> ParseStringList(string ss)
     {
         List<string> ret = new List<string>();
         if (Utils.IsMeaningful(ref ss))
@@ -395,7 +395,7 @@ public static class Utils
         return ret;
     }
 
-    static public void GetCDString(StringBuilder sb, int timeLeft)
+    public static void GetCDString(StringBuilder sb, int timeLeft)
     {
         int day = timeLeft / 86400;
         int dl = timeLeft % 86400;
@@ -412,7 +412,7 @@ public static class Utils
         sb.Append(minutes.ToString("D2")).Append(":").Append(second.ToString("D2"));
     }
 
-    static public IEnumerator WaitForRealSeconds(float delay, System.Action callback = null)
+    public static IEnumerator WaitForRealSeconds(float delay, System.Action callback = null)
     {
         float start = Time.realtimeSinceStartup;
         while (Time.realtimeSinceStartup < start + delay)
@@ -420,7 +420,7 @@ public static class Utils
         callback.Invoke();
     }
 
-    static public IEnumerator WaitForFrame(int frame, System.Action callback = null)
+    public static IEnumerator WaitForFrame(int frame, System.Action callback = null)
     {
         int count = 0;
         while (count < frame)
@@ -431,7 +431,7 @@ public static class Utils
         callback.Invoke();
     }
 
-    static public float GetRadianBetween(float rad1, float rad2)
+    public static float GetRadianBetween(float rad1, float rad2)
     {
         float twoPi = Mathf.PI * 2;
         return Mathf.Min(Mathf.Abs(rad1 - rad2 + twoPi) % twoPi, Mathf.Abs((rad2 - rad1 + twoPi) % twoPi));
@@ -474,7 +474,7 @@ public static class Utils
         return hit;
     }
 
-    static public float DistanceToLineSeg(Vector3 v, Vector3 start, Vector3 end)
+    public static float DistanceToLineSeg(Vector3 v, Vector3 start, Vector3 end)
     {
         float r = 0;
         Vector3 dir = (end - start).normalized;
@@ -496,7 +496,7 @@ public static class Utils
         return r;
     }
 
-    static public string trim(string inputstr, int maxLenth)
+    public static string trim(string inputstr, int maxLenth)
     {
         if (maxLenth > 0 && maxLenth < inputstr.Length)
         {
@@ -507,7 +507,7 @@ public static class Utils
     }
 
 
-    static public DateTime GetDateTime(TimeRegion region)
+    public static DateTime GetDateTime(TimeRegion region)
     {
         if (region == TimeRegion.American)
             return DateTime.UtcNow.AddHours(-5);
@@ -515,12 +515,12 @@ public static class Utils
         return DateTime.UtcNow;
     }
 
-    static public DateTime ConvertToDatetime(long timestamp)
+    public static DateTime ConvertToDatetime(long timestamp)
     {
         return ConvertToDatetime(timestamp.ToString());
     }
 
-    static public DateTime ConvertToDatetime(string timestamp)
+    public static DateTime ConvertToDatetime(string timestamp)
     {
         long lTime = long.Parse(timestamp + "0000000");
         TimeSpan toNow = new TimeSpan(lTime);
@@ -528,18 +528,18 @@ public static class Utils
         return DtStart.Add(toNow);
     }
 
-    static public long ConvertToTimestamp(DateTime time)
+    public static long ConvertToTimestamp(DateTime time)
     {
         return (long)(time - DtStart).TotalSeconds;
     }
 
-    static public DateTime LastDayInMonth(int year, int month)
+    public static DateTime LastDayInMonth(int year, int month)
     {
         DateTime resource = new DateTime(year, month, 1);
         return resource.AddMonths(1).AddDays(-1);
     }
 
-    static public float GetTapThreshold()
+    public static float GetTapThreshold()
     {
         if (UnityEngine.EventSystems.EventSystem.current == null)
             return 0;

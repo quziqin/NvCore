@@ -37,7 +37,7 @@ public class FloatTweener
 
 	public float CurrentValue { get; set; }
 
-	static public FloatTweener CreateTweener(float cv, float tv, float duration)
+	public static FloatTweener CreateTweener(float cv, float tv, float duration)
 	{
 		if (duration == 0)
 			return null;

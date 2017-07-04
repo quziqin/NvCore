@@ -95,16 +95,16 @@ public class NativeStreamReader
     }
 
     public string ReadUTFBytes(int length)
-	{
-		byte[] temp = new byte[length + 1];
+    {
+        byte[] temp = new byte[length + 1];
         if (ReadBytes(temp, length) == length)
-		{
+        {
             temp[length]        = 0;
             System.Text.Encoding ec = System.Text.Encoding.UTF8;
             return ec.GetString(temp, 0, (int)length);
-		}
-		return null;
-	}
+        }
+        return null;
+    }
 
     public string ReadString()
     {
